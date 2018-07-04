@@ -11,6 +11,7 @@ typo3:
     DB_HOST: "db"
     DB_PORT: "3306"
 db:
-  image: mysql:latest
+  image: mysql
+  restart: always
   environment:
-    MYSQL_PASS: "**ChangeMe**"
+    MYSQL_ROOT_PASSWORD: "**ChangeMe**"

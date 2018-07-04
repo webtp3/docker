@@ -58,14 +58,14 @@ fi
 if [ ! -f /var/www/html/typo3conf/LocalConfiguration.php ]
     then
         php typo3cms install:setup --non-interactive \
-            --database-user-name="admin" \
+            --database-user-name="tp3min" \
             --database-host-name="$DB_HOST" \
             --database-port="$DB_PORT" \
             --database-name="$DB_NAME" \
             --database-user-password="$DB_PASS" \
             --database-create=0 \
-            --admin-user-name="admin" \
-            --admin-password="password" \
+            --admin-user-name="tp3min" \
+            --admin-password="Init1111" \
             --site-name="TYPO3 Demo Installation"
 
         echo "Set permissions for /var/www/html folder ..."
