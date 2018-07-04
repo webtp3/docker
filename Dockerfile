@@ -28,7 +28,7 @@ RUN php -r "if (hash_file('SHA384', 'composer-setup.php') === '544e09ee996cdf60e
 RUN php composer-setup.php
 RUN php -r "unlink('composer-setup.php');"
 
-RUN  composer --dev --stability=dev create-project web-tp3/tp3_installer:dev-master
+RUN  composer --dev --stability=dev create-project web-tp3/tp3_installer
 
 # Expose environment variables
 ENV DB_HOST **LinkMe**
@@ -39,7 +39,7 @@ ENV DB_PASS **ChangeMe**
 ENV INSTALL_TOOL_PASSWORD password
 
 EXPOSE 80
-CMD ["/bin/bash", "-c", "/run-typo3.sh"]
+#CMD ["/bin/bash", "-c", "/run-typo3.sh"]
 
 ADD AdditionalConfiguration.php /var/www/html/typo3conf/
 
