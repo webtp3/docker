@@ -1,0 +1,16 @@
+typo3:
+  build: .
+  links: 
+   - db
+  ports:
+   - "80:80"
+  environment:
+    DB_NAME: typo3
+    DB_USER: admin
+    DB_PASS: "**ChangeMe**"
+    DB_HOST: "db"
+    DB_PORT: "3306"
+db:
+  image: mysql:latest
+  environment:
+    MYSQL_PASS: "**ChangeMe**"

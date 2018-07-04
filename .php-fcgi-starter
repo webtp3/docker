@@ -1,0 +1,20 @@
+#!/bin/sh
+PHPRC="/etc/php/7.1/cgi/"
+export PHPRC
+PHP_DOCUMENT_ROOT="/var/www/html"
+export PHP_DOCUMENT_ROOT
+# The variable PHP_FCGI_CHILDREN is onyl useful for lighty or nginx as apache 
+# mod_fcgi will control the number of childs themself and never use the additional processes.
+# PHP_FCGI_CHILDREN=8
+# export PHP_FCGI_CHILDREN
+PHP_FCGI_MAX_REQUESTS=5000
+export PHP_FCGI_MAX_REQUESTS
+export TMP=/var/www/tmp
+export TMPDIR=/var/www/tmp
+export TEMP=/var/www/tmp
+exec /usr/bin/php-cgi \
+ -d open_basedir="/var/www/html:/usr/share/php5:/usr/share/php:/tmp:/dev/random:/dev/urandom" \
+-d upload_tmp_dir=/var/www/tmp \
+-d session.save_path=/var/www/tmp \
+-d sendmail_path="/usr/sbin/sendmail -t -i -f webmaster@tp3.de" \
+ $1
