@@ -1,8 +1,18 @@
+<<<<<<< HEAD
 image: atlassian/default-image:2
+=======
+# This is a sample build configuration for PHP.
+# Check our guides at https://confluence.atlassian.com/x/e8YWN for more examples.
+# Only use spaces to indent your .yml configuration.
+# -----
+# You can specify a custom docker image from Docker Hub as your build environment.
+image: php:7.1.1
+>>>>>>> origin/master
 
 pipelines:
   default:
     - step:
+<<<<<<< HEAD
         services:
           - docker
         script: # Modify the commands below to build your repository.
@@ -15,3 +25,12 @@ pipelines:
           - docker login --username $DOCKER_HUB_USERNAME --password $DOCKER_HUB_PASSWORD
           # push the new Docker image to the Docker registry
           - docker push $IMAGE_NAME
+=======
+        caches:
+          - composer
+        script:
+          - apt-get update && apt-get install -y unzip
+          - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+          - composer install
+          - vendor/bin/phpunit
+>>>>>>> origin/master
