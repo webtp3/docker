@@ -7,12 +7,10 @@ image: atlassian/default-image:2
 # -----
 # You can specify a custom docker image from Docker Hub as your build environment.
 image: php:7.1.1
->>>>>>> origin/master
 
 pipelines:
   default:
     - step:
-<<<<<<< HEAD
         services:
           - docker
         script: # Modify the commands below to build your repository.
@@ -25,7 +23,7 @@ pipelines:
           - docker login --username $DOCKER_HUB_USERNAME --password $DOCKER_HUB_PASSWORD
           # push the new Docker image to the Docker registry
           - docker push $IMAGE_NAME
-=======
+    - step:
         caches:
           - composer
         script:
@@ -33,4 +31,3 @@ pipelines:
           - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
           - composer install
           - vendor/bin/phpunit
->>>>>>> origin/master
