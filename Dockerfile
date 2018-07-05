@@ -1,6 +1,11 @@
 FROM ubuntu:bionic
 MAINTAINER Thomas Ruta
 
+#set lang tzdata
+RUN apt-get update && apt-get install -y locales && rm -rf /var/lib/apt/lists/* \
+    && localedef -i de_DE -c -f UTF-8 -A /usr/share/locale/locale.alias de_DE.UTF-8
+ENV LANG de_DE.utf8
+
 #prepair Server
 #RUN sudo -s
 #RUN sudo passwd root
@@ -9,16 +14,16 @@ RUN apt-get update && \
 
 # Install packages
 RUN apt-get update && \
-    apt-get -yq --force-yes install mysql-client git curl imagemagick apache2 apache2-doc apache2-utils libapache2-mod-php  php7.0 php7.0-common php7.0-gd php7.0-mysql \
-    php7.0-imap php7.0-cli php7.0-cgi libapache2-mod-fcgid apache2-suexec-pristine php-pear php-auth php7.0-mcrypt mcrypt  imagemagick libruby libapache2-mod-python \
-    php7.0-curl php7.0-intl php7.0-pspell php7.0-recode php7.0-sqlite3 php7.0-tidy php7.0-xmlrpc php7.0-xsl memcached php-memcache php-imagick php-gettext php7.0-zip php7.0-mbstring \
-    php7.0-soap  php7.0-json php7.0-opcache php-apcu libapache2-mod-fastcgi php7.0-fpm
+    apt-get -yq --force-yes install mysql-client git curl imagemagick apache2 apache2-doc apache2-utils libapache2-mod-php  php7.2 php7.2-common php7.2-gd php7.2-mysql \
+    php7.2-imap php7.2-cli php7.2-cgi libapache2-mod-fcgid apache2-suexec-pristine php-pear php-auth php7.2-mcrypt mcrypt  imagemagick libruby libapache2-mod-python \
+    php7.2-curl php7.2-intl php7.2-pspell php7.2-recode php7.2-sqlite3 php7.2-tidy php7.2-xmlrpc php7.2-xsl memcached php-memcache php-imagick php-gettext php7.2-zip php7.2-mbstring \
+    php7.2-soap  php7.2-json php7.2-opcache php-apcu libapache2-mod-fastcgi php7.2-fpm
 
 
 # config apache
 RUN a2enmod suexec rewrite ssl actions include cgi
 RUN a2enmod dav_fs dav auth_digest headers
-#RUN apt-get install php7.0-opcache php-apcu libapache2-mod-fastcgi php7.0-fpm
+#RUN apt-get install php7.2-opcache php-apcu libapache2-mod-fastcgi php7.2-fpm
 RUN a2enmod actions fastcgi alias
 ADD typo3.conf /etc/apache2/sites-enabled/000-default.conf
 RUN mkdir /var/www/html/php-fcgi-scripts && mkdir /var/www/tmp && mkdir /var/www/cgi-bin
@@ -43,7 +48,7 @@ RUN cd /var/www/
 VOLUME [ "/var/www/html/uploads", "/var/www/html/fileadmin"]
 
 #letscrypt for ssl
-RUN apt-get -y install letsencrypt
+#RUN apt-get -yq install letsencrypt
 
 # Expose environment variables
 ENV DB_HOST **LinkMe**
