@@ -7,7 +7,7 @@ pipelines:
           - docker
         script: # Modify the commands below to build your repository.
           # Set $DOCKER_HUB_USERNAME and $DOCKER_HUB_PASSWORD as environment variables in repository settings
-          - export webtp3/docker:$BITBUCKET_BRANCH
+          - export webtp3/docker:alpha
 
           # build the Docker image (this will use the Dockerfile in the root of the repo)
           - docker build -t $IMAGE_NAME .
@@ -21,4 +21,4 @@ pipelines:
         script:
           - apt-get update && apt-get install -y unzip
           - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-          - composer --dev --stability=dev create-project web-tp3/tp3_installer
+          #- composer --dev --stability=dev create-project web-tp3/tp3_installer
