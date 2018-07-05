@@ -39,12 +39,11 @@ ENV DB_USER admin
 ENV DB_PASS **ChangeMe**
 ENV INSTALL_TOOL_PASSWORD password
 
-EXPOSE 80
-CMD ["/bin/bash", "-c", "/run-typo3.sh"]
+#CMD ["/bin/bash", "-c", "/run-typo3.sh"]
 
 ADD AdditionalConfiguration.php /var/www/html/typo3conf/
 
 # Install dependencies defined in composer.json
-#ADD composer.json /var/www/html/
-#ADD composer.lock /var/www/html/
+ADD composer.json /var/www/html/
 #RUN composer install && cp typo3conf/ext/typo3_console/Scripts/typo3cms .
+EXPOSE 80

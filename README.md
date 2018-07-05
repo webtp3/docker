@@ -11,11 +11,11 @@ Usage (standalone)
 
 This image needs an external MySQL server or linked MySQL container. To create a MySQL container:
 
-    docker run -d -e MYSQL_PASS="<your_password>" --name db -p 3306:3306 mysql:stable
+    docker run -d -e MYSQL_ROOT_PASSWORD="**ChangeMe**" --name db -p 3306:3306 webtp3/tp3sql
 
 To run TYPO3 by linking to the database created above:
 
-    docker run -d --link db:db -e DB_PASS="<your_password>" -p 80:80 webtp3/docker
+    docker run -d --link db:db -e DB_PASS="**ChangeMe**" -p 80:80 webtp3/docker
 
 Usage (combined)
 ------------------
