@@ -1,0 +1,112 @@
+###
+# typical build / composer / vendor folders to ignore
+#
+/vendor
+/node_modules
+/.build-cache
+/_temp/*
+!/_temp/.gitkeep
+/bin
+/typo3cms
+
+
+###
+# some typical TYPO3 folders and files to be ignored
+#
+/web/FIRST_INSTALL
+/web/fileadmin
+/web/uploads
+/web/typo3temp/*
+/web/typo3
+/web/typo3_src
+/web/index.php
+
+
+###
+# composer friendly setup for typo3conf
+#
+/web/typo3conf/*
+!/web/typo3conf/LocalConfiguration.php
+!/web/typo3conf/AdditionalConfiguration.php
+!/web/typo3conf/PackageStates.php
+!/web/typo3conf/realurl_conf.php
+!/web/typo3conf/ext
+/web/typo3conf/ext/*
+
+/web/typo3conf/conf.d/*
+!/web/typo3conf/conf.d/.gitkeep
+
+# TODO: think about that!
+!/web/typo3conf/l10n
+
+# own or patched extensions to be included in mhr_www.git
+#!/web/typo3conf/ext/tmpl
+#!/web/typo3conf/ext/someotherhotext
+
+
+
+###
+# ignore some files for .env environment configuration handling
+#
+/.env
+/var/log/*
+!/var/log/.gitkeep
+/var/cache/*
+!/var/cache/.gitkeep
+/var/storage/*
+!/var/storage/.gitkeep
+
+
+
+###
+# some dev helper / compiled files to be ignored
+# TODO: think about that - maybe include some of them again?
+#
+/web/typo3conf/ext/tmpl/Resources/Public/css/*
+/web/typo3conf/ext/tmpl/Resources/Public/js/*
+
+
+
+###
+# ignore test screenshots and results
+# TODO: think about that - maybe include some of them again?
+#
+#/tests/visual/backstop_data/bitmaps_reference/*.png
+#/tests/visual/backstop_data/bitmaps_test/*/*.png
+#/tests/visual/backstop_data/ci_report/*.xml
+#/tests/visual/backstop_data/html_report/*
+#!/tests/visual/backstop_data/html_report/.keep
+
+
+
+###
+# Ignoring temporary files (left by e.g. vim)
+# Ignoring by common IDE's used directories/files
+#
+*~
+*.bak
+*.idea
+*.project
+*.swp
+.buildpath
+.cache
+.project
+.session
+.settings
+.TemporaryItems
+.webprj
+nbproject
+.nbproject
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+.htpasswd
+.sass-cache
+.tmproj
+*.sublime-project
+*.sublime-workspace;
+.env
