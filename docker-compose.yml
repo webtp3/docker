@@ -15,3 +15,10 @@ db:
   restart: always
   environment:
     MYSQL_ROOT_PASSWORD: my-secret-pw
+  ports:
+    - "80:80"
+adminer:
+  image: adminer
+  restart: always
+  ports:
+    - 8080:8080
