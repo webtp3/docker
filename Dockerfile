@@ -1,37 +1,49 @@
-FROM ubuntu:xenial
+FROM ubuntu:bionic
 MAINTAINER Thomas Ruta
+
+#prepair Server
+#RUN sudo -s
+#RUN sudo passwd root
+RUN apt-get update && \
+    apt-get -yq install ssh openssh-server nano vim-nox
 
 # Install packages
 RUN apt-get update && \
-    apt-get -yq --force-yes install mysql-client git curl imagemagick apache2 apache2-doc apache2-utils libapache2-mod-php  php7.0 php7.0-common php7.0-gd php7.0-mysql php7.0-imap php7.0-cli php7.0-cgi libapache2-mod-fcgid apache2-suexec-pristine php-pear php-auth php7.0-mcrypt mcrypt  imagemagick libruby libapache2-mod-python php7.0-curl php7.0-intl php7.0-pspell php7.0-recode php7.0-sqlite3 php7.0-tidy php7.0-xmlrpc php7.0-xsl memcached php-memcache php-imagick php-gettext php7.0-zip php7.0-mbstring  php7.0-soap  php7.0-json php7.0-opcache php-apcu libapache2-mod-fastcgi php7.0-fpm
+    apt-get -yq --force-yes install mysql-client git curl imagemagick apache2 apache2-doc apache2-utils libapache2-mod-php  php7.0 php7.0-common php7.0-gd php7.0-mysql \
+    php7.0-imap php7.0-cli php7.0-cgi libapache2-mod-fcgid apache2-suexec-pristine php-pear php-auth php7.0-mcrypt mcrypt  imagemagick libruby libapache2-mod-python \
+    php7.0-curl php7.0-intl php7.0-pspell php7.0-recode php7.0-sqlite3 php7.0-tidy php7.0-xmlrpc php7.0-xsl memcached php-memcache php-imagick php-gettext php7.0-zip php7.0-mbstring \
+    php7.0-soap  php7.0-json php7.0-opcache php-apcu libapache2-mod-fastcgi php7.0-fpm
 
+
+# config apache
 RUN a2enmod suexec rewrite ssl actions include cgi
 RUN a2enmod dav_fs dav auth_digest headers
-
 #RUN apt-get install php7.0-opcache php-apcu libapache2-mod-fastcgi php7.0-fpm
-#RUN a2enmod actions fastcgi alias
-
+RUN a2enmod actions fastcgi alias
 ADD typo3.conf /etc/apache2/sites-enabled/000-default.conf
 RUN mkdir /var/www/html/php-fcgi-scripts && mkdir /var/www/tmp && mkdir /var/www/cgi-bin
-
 ADD .php-fcgi-starter /var/www/php-fcgi-scripts
 
 # Adjust some php settings
 ADD typo3.php.ini /etc/php/cgi/conf.d/
 
-RUN rm -fr /var/www/html/*
-VOLUME [ "/var/www/html/uploads", "/var/www/html/fileadmin"]
+#remove default
+RUN rm -fr /var/www/html
 
-
-
-RUN useradd composeruser
-RUN su composeruser
+#add composer
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 RUN php -r "if (hash_file('SHA384', 'composer-setup.php') === '544e09ee996cdf60ece3804abc52599c22b1f40f4323403c44d44fdfdd586475ca9813a858088ffbc1f233e9b180f061') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
 RUN php composer-setup.php
 RUN php -r "unlink('composer-setup.php');"
 RUN chmod 755 composer.phar
-#RUN su composeruser php composer.phar install create-project web-tp3/tp3_installer
+RUN cd /var/www/
+#RUN php composer.phar --stability dev --dev  create-project web-tp3/tp3_installer html
+
+#create dirs for typo3 install
+VOLUME [ "/var/www/html/uploads", "/var/www/html/fileadmin"]
+
+#letscrypt for ssl
+RUN apt-get -y install letsencrypt
 
 # Expose environment variables
 ENV DB_HOST **LinkMe**

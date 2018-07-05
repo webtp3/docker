@@ -1,5 +1,5 @@
 {
-    "name": "web-tp3/tp3_installer",
+    "name": "web-tp3/docker",
     "description": "testing typo3",
     "type": "project",
     "minimum-stability": "dev",
