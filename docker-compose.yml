@@ -11,7 +11,14 @@ typo3:
     DB_HOST: "db"
     DB_PORT: "3306"
 db:
-  image: mysql
+  image:  webtp3/tp3sql
   restart: always
   environment:
-    MYSQL_ROOT_PASSWORD: "**ChangeMe**"
+    MYSQL_ROOT_PASSWORD: my-secret-pw
+  ports:
+    - "3306:3306"
+adminer:
+  image: adminer
+  restart: always
+  ports:
+    - 8080:8080

@@ -22,8 +22,6 @@ ADD typo3.php.ini /etc/php/cgi/conf.d/
 RUN rm -fr /var/www/html/*
 VOLUME [ "/var/www/html/uploads", "/var/www/html/fileadmin"]
 
-
-
 RUN useradd composeruser
 RUN su composeruser
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
