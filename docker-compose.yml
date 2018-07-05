@@ -16,7 +16,7 @@ db:
   environment:
     MYSQL_ROOT_PASSWORD: my-secret-pw
   ports:
-    - "80:80"
+    - "3306:3306"
 adminer:
   image: adminer
   restart: always
