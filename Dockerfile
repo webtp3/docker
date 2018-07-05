@@ -5,6 +5,7 @@ MAINTAINER Thomas Ruta
 RUN apt-get update && apt-get install -y locales && rm -rf /var/lib/apt/lists/* \
     && localedef -i de_DE -c -f UTF-8 -A /usr/share/locale/locale.alias de_DE.UTF-8
 ENV LANG de_DE.utf8
+ENV DEBIAN_FRONTEND noninteractive
 
 #prepair Server
 #RUN sudo -s
@@ -15,16 +16,16 @@ RUN apt-get update && \
 # Install packages
 RUN apt-get update && \
     apt-get -yq --force-yes install mysql-client git curl imagemagick apache2 apache2-doc apache2-utils libapache2-mod-php  php7.2 php7.2-common php7.2-gd php7.2-mysql \
-    php7.2-imap php7.2-cli php7.2-cgi libapache2-mod-fcgid apache2-suexec-pristine php-pear php-auth php7.2-mcrypt mcrypt  imagemagick libruby libapache2-mod-python \
+    php7.2-imap php7.2-cli php7.2-cgi libapache2-mod-fcgid apache2-suexec-pristine php-pear mcrypt  imagemagick graphicsmagick libruby libapache2-mod-python \
     php7.2-curl php7.2-intl php7.2-pspell php7.2-recode php7.2-sqlite3 php7.2-tidy php7.2-xmlrpc php7.2-xsl memcached php-memcache php-imagick php-gettext php7.2-zip php7.2-mbstring \
-    php7.2-soap  php7.2-json php7.2-opcache php-apcu libapache2-mod-fastcgi php7.2-fpm
+    php7.2-soap  php7.2-json php7.2-opcache php-apcu libapache2-mod-fcgid php7.2-fpm
 
 
 # config apache
 RUN a2enmod suexec rewrite ssl actions include cgi
 RUN a2enmod dav_fs dav auth_digest headers
 #RUN apt-get install php7.2-opcache php-apcu libapache2-mod-fastcgi php7.2-fpm
-RUN a2enmod actions fastcgi alias
+RUN a2enmod actions alias
 ADD typo3.conf /etc/apache2/sites-enabled/000-default.conf
 RUN mkdir /var/www/html/php-fcgi-scripts && mkdir /var/www/tmp && mkdir /var/www/cgi-bin
 ADD .php-fcgi-starter /var/www/php-fcgi-scripts
@@ -48,7 +49,7 @@ RUN cd /var/www/
 VOLUME [ "/var/www/html/uploads", "/var/www/html/fileadmin"]
 
 #letscrypt for ssl
-#RUN apt-get -yq install letsencrypt
+RUN apt-get -yq install letsencrypt
 
 # Expose environment variables
 ENV DB_HOST **LinkMe**
