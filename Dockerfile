@@ -57,7 +57,7 @@ ADD typo3.conf /etc/apache2/sites-enabled/000-default.conf
 ENV DB_HOST **LinkMe**
 ENV DB_PORT **LinkMe**
 ENV DB_NAME typo3
-ENV DB_USER admin
+ENV DB_USER root
 ENV DB_PASS **ChangeMe**
 ENV INSTALL_TOOL_PASSWORD password
 RUN service apache2 restart
