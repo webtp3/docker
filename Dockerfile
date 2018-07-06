@@ -11,7 +11,7 @@ RUN a2enmod dav_fs dav auth_digest headers
 #RUN apt-get install php7.0-opcache php-apcu libapache2-mod-fastcgi php7.0-fpm
 #RUN a2enmod actions fastcgi alias
 
-ADD typo3.conf /etc/apache2/sites-enabled/000-default.conf
+#ADD typo3.conf /etc/apache2/sites-enabled/000-default.conf
 RUN mkdir /var/www/html/php-fcgi-scripts && mkdir /var/www/tmp && mkdir /var/www/cgi-bin
 
 ADD .php-fcgi-starter /var/www/php-fcgi-scripts
@@ -22,14 +22,12 @@ ADD typo3.php.ini /etc/php/cgi/conf.d/
 RUN rm -fr /var/www/html/*
 VOLUME [ "/var/www/html/uploads", "/var/www/html/fileadmin"]
 
-RUN useradd composeruser
-RUN su composeruser
-RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-RUN php -r "if (hash_file('SHA384', 'composer-setup.php') === '544e09ee996cdf60ece3804abc52599c22b1f40f4323403c44d44fdfdd586475ca9813a858088ffbc1f233e9b180f061') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
-RUN php composer-setup.php
-RUN php -r "unlink('composer-setup.php');"
-RUN chmod 755 composer.phar
-#RUN su composeruser php composer.phar install create-project web-tp3/tp3_installer
+#RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+#RUN php -r "if (hash_file('SHA384', 'composer-setup.php') === '544e09ee996cdf60ece3804abc52599c22b1f40f4323403c44d44fdfdd586475ca9813a858088ffbc1f233e9b180f061') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+#RUN php composer-setup.php
+#RUN php -r "unlink('composer-setup.php');"
+#RUN chmod 755 composer.phar
+#RUN php composer.phar install create-project web-tp3/tp3_installer
 
 # Expose environment variables
 ENV DB_HOST **LinkMe**
@@ -41,9 +39,9 @@ ENV INSTALL_TOOL_PASSWORD password
 
 #CMD ["/bin/bash", "-c", "/run-typo3.sh"]
 
-ADD AdditionalConfiguration.php /var/www/html/typo3conf/
-
+#ADD AdditionalConfiguration.php /var/www/html/typo3conf/
+RUN service apache2 start
 # Install dependencies defined in composer.json
-ADD composer.json /var/www/html/
+#ADD composer.json /var/www/html/
 #RUN composer install && cp typo3conf/ext/typo3_console/Scripts/typo3cms .
 EXPOSE 80
