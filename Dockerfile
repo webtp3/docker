@@ -5,7 +5,7 @@ MAINTAINER Thomas Ruta
 #RUN sudo -s
 #RUN sudo passwd root
 RUN apt-get update && \
-    apt-get -yq install ssh openssh-server nano vim-nox uwf
+    apt-get -yq install ssh openssh-server nano vim-nox ufw
 
 # Install packages
 RUN apt-get update && \
