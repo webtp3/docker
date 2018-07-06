@@ -5,9 +5,9 @@ DB_HOST=${DB_1_PORT_3306_TCP_ADDR:-${DB_HOST}}
 DB_PORT=${DB_PORT_3306_TCP_PORT:-${DB_PORT}}
 DB_PORT=${DB_1_PORT_3306_TCP_PORT:-${DB_PORT}}
 
-if [ "$DB_PASS" = "**ChangeMe**" ] && [ -n "$DB_1_ENV_MYSQL_PASS" ]; then
-    DB_PASS="$DB_1_ENV_MYSQL_PASS"
-fi
+#if [ "$DB_PASS" = "**ChangeMe**" ] && [ -n "$DB_1_ENV_MYSQL_PASS" ]; then
+#    DB_PASS="$DB_1_ENV_MYSQL_PASS"
+#fi
 
 echo "=> Using the following MySQL/MariaDB configuration:"
 echo "========================================================================"
