@@ -48,7 +48,7 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 RUN php -r "if (hash_file('SHA384', 'composer-setup.php') === '544e09ee996cdf60ece3804abc52599c22b1f40f4323403c44d44fdfdd586475ca9813a858088ffbc1f233e9b180f061') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
 RUN php composer-setup.php
 RUN php -r "unlink('composer-setup.php');"
-
+RUN cd /var/www/
 RUN php composer.phar --dev --stability=dev create-project web-tp3/tp3_installer:dev-8.x-dev html
 VOLUME [ "/var/www/html/uploads", "/var/www/html/fileadmin" ,"/var/www/html/error" ]
 ADD typo3.conf /etc/apache2/sites-enabled/000-default.conf
@@ -62,7 +62,7 @@ ENV DB_PASS **ChangeMe**
 ENV INSTALL_TOOL_PASSWORD password
 RUN service apache2 restart
 RUN service ssh start
-#CMD ["/bin/sh", "-c", "/var/www/cgi-bin/run-typo3.sh"]
+CMD ["/bin/sh", "-c", "/var/www/cgi-bin/run-typo3.sh"]
 
 #ADD AdditionalConfiguration.php /var/www/html/typo3conf/
 # Install dependencies defined in composer.json
