@@ -23,11 +23,12 @@ RUN a2enmod dav_fs dav auth_digest headers
 #RUN apt-get install php7.0-opcache php-apcu libapache2-mod-fastcgi php7.0-fpm
 RUN a2enmod actions fastcgi alias
 RUN rm /etc/apache2/sites-enabled/000-default.conf -rf
-RUN mkdir /var/www/html/php-fcgi-scripts && mkdir /var/www/tmp && mkdir /var/www/cgi-bin
+RUN mkdir /var/www/php-fcgi-scripts && mkdir /var/www/tmp && mkdir /var/www/cgi-bin
 
 ADD .php-fcgi-starter /var/www/php-fcgi-scripts/
-RUN useradd -m -p $6$PuiliFOPUCXV$ZRMim2oiMzecjfw0EtUq3dLEbfyogKRvHze1028pCRV5UKcWMLEF4hi6bQM32eLP.U.P30wCBpib3Hyr5Rdtv1 -s /bin/bash typo3
-RUN echo AllowUsers typo3 >> /etc/ssh/sshd_config
+RUN chmod 755 /var/www/php-fcgi-scripts/.php-fcgi-starter && chown www-data:www-data /var/www/php-fcgi-scripts/.php-fcgi-starter
+RUN useradd -m -p test -s /bin/bash typo3
+RUN echo AllowUsers typo3 >> /etc/ssh/sshd_config && sed -i "s/.*PasswordAuthentication .*/PasswordAuthentication  yes/g" /etc/ssh/sshd_config
 
 #cert for cag_tests
 ADD id_rsa  /root/.ssh/
