@@ -14,7 +14,6 @@ RUN apt-get update && \
     php7.0-sqlite3 php7.0-tidy php7.0-xmlrpc php7.0-xsl memcached php-memcache php-imagick php-gettext php7.0-zip php7.0-mbstring  php7.0-soap  php7.0-json php7.0-opcache php-apcu libapache2-mod-fastcgi \
     php7.0-fpm
 
-RUN echo 1 > /proc/sys/net/ipv6/conf/all/disable_ipv6
 RUN ufw enable && ufw allow ssh && ufw allow dns && ufw allow http && ufw allow https && ufw allow from 0.0.0.0 to 127.0.0.1 port http && \
     ufw allow from 0.0.0.0 to 127.0.0.1 port https && ufw allow from 0.0.0.0 to 127.0.0.1 port ssh
 
