@@ -75,5 +75,5 @@ fi
 # Start apache in foreground if no arguments are given
 if [ $# -eq 0 ]
 then
-    /run.sh
+    service apache2 start
 fi

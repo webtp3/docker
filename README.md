@@ -15,8 +15,18 @@ This image needs an external MySQL server or linked MySQL container. To create a
 
 To run TYPO3 by linking to the database created above:
 
-    docker run -d --rm -it -v $PWD:/build --link db:db -e DB_PASS="**ChangeMe**" -p 80:80 webtp3/docker:16.4-stable
+    docker run -d --rm -it -v $PWD:/build --link db:db -e DB_PASS="**ChangeMe**" -p 80:80 --name typo3 webtp3/docker:16.4-stable
+    
+to have a bash simply add bash to the end of the command (as you can run any command in the docker image)
+"docker run -d --rm -it -v $PWD:/build --link db:db -e DB_PASS="**ChangeMe**" -p 80:80 --name typo3 webtp3/docker:8-stable bash"
 
+Following branches are available:
+8-stable (with tyo3 installed)
+16.4-stable (just apache and php 7.1 - waiting for install in /var/www/html)
+18.4-stable (just apache and php 7.2 - waiting for install in /var/www/html)
+ 
+https://hub.docker.com/r/webtp3/docker  
+ 
 Usage (combined)
 ------------------
 ia docker stack deploy or docker-compose
