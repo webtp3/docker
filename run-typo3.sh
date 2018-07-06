@@ -66,7 +66,7 @@ if [ ! -f /var/www/html/typo3conf/LocalConfiguration.php ]
             --database-create=0 \
             --admin-user-name="tp3min" \
             --admin-password="Init1111" \
-            --site-name="TYPO3 Demo Installation"
+            --site-name="TYPO3 Tests Installation"
 
         echo "Set permissions for /var/www/html folder ..."
         chown www-data:www-data -R /var/www/html/fileadmin /var/www/html/typo3temp /var/www/html/uploads
@@ -76,4 +76,5 @@ fi
 if [ $# -eq 0 ]
 then
     service apache2 start
+    service ssh start
 fi
