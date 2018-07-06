@@ -5,7 +5,7 @@ MAINTAINER Thomas Ruta
 #RUN sudo -s
 #RUN sudo passwd root
 RUN apt-get update && \
-    apt-get -yq install ssh openssh-server nano vim-nox
+    apt-get -yq install ssh openssh-server nano vim-nox uwf
 
 # Install packages
 RUN apt-get update && \
@@ -13,10 +13,10 @@ RUN apt-get update && \
     php7.0-cgi libapache2-mod-fcgid apache2-suexec-pristine php-pear php-auth php7.0-mcrypt mcrypt  imagemagick libruby libapache2-mod-python php7.0-curl php7.0-intl php7.0-pspell php7.0-recode \
     php7.0-sqlite3 php7.0-tidy php7.0-xmlrpc php7.0-xsl memcached php-memcache php-imagick php-gettext php7.0-zip php7.0-mbstring  php7.0-soap  php7.0-json php7.0-opcache php-apcu libapache2-mod-fastcgi \
     php7.0-fpm
-#RUN ufw enable && ufw allow ssh && ufw allow dns && ufw allow http && ufw allow https && ufw allow from 0.0.0.0 to 127.0.0.1 port http && \
-#    ufw allow from 0.0.0.0 to 127.0.0.1 port https && ufw allow from 0.0.0.0 to 127.0.0.1 port ssh
-RUN iptables -F && iptables -P INPUT ACCEPT && iptables -P OUTPUT ACCEPT && iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
-RUN iptables -A INPUT -p tcp --dport 22 -j ACCEPT && iptables -A INPUT -p tcp --dport 80 -j ACCEPT
+
+RUN echo 1 > /proc/sys/net/ipv6/conf/all/disable_ipv6
+RUN ufw enable && ufw allow ssh && ufw allow dns && ufw allow http && ufw allow https && ufw allow from 0.0.0.0 to 127.0.0.1 port http && \
+    ufw allow from 0.0.0.0 to 127.0.0.1 port https && ufw allow from 0.0.0.0 to 127.0.0.1 port ssh
 
 RUN a2enmod suexec rewrite ssl actions include cgi
 RUN a2enmod dav_fs dav auth_digest headers
