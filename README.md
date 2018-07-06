@@ -1,4 +1,4 @@
-tp3/docker
+webtp3/docker
 ============================
 
 TYPO3 docker testing image - This image is part of an automated testing enviroment.
@@ -25,7 +25,9 @@ Following branches are available:
 16.4-stable (just apache and php 7.1 - waiting for install in /var/www/html)
 18.4-stable (just apache and php 7.2 - waiting for install in /var/www/html)
  
-https://hub.docker.com/r/webtp3/docker  
+    docker cp typo3 /from/ /to/        (Copy files/folders between a container and the local filesystem)
+
+ 
  
 Usage (combined)
 ------------------
@@ -36,14 +38,31 @@ ia docker stack deploy or docker-compose
 Now, you can use your web browser to access TYPO3 from the the follow address:
 
     http://localhost/typo3
+    User is "tp3min" and password is "Init1111".
 
-User is "tp3min" and password is "Init1111".
+    
+The mysql Adminer 
 
-more about the base images an be foun on the docker hub:
+    http://localhost:8080
+
+Mysql Server can also be reached from outside on port 3306
+
+SSH Server also for Rsync and other stuff
+
+graphicsmagick, imagemagick, letscrypr, openssl, php-xdebug and I think all what you need.
+
+Usage (combined)
+------------------
+
+ more about the base images an be found on the docker hub:
+
+https://hub.docker.com/r/webtp3/docker 
+
+The System runs with a php fastcgi wrapper. So you can easyly swap php Versions to tests on several ons.
 
 Web Server
 https://hub.docker.com/_/ubuntu/
 
 Database Server
 https://hub.docker.com/_/mysql/
- 
+
