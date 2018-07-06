@@ -1,5 +1,5 @@
 #!/bin/sh
-PHPRC="/etc/php/7.1/cgi/"
+PHPRC="/etc/php/7.0/cgi/"
 export PHPRC
 PHP_DOCUMENT_ROOT="/var/www/html"
 export PHP_DOCUMENT_ROOT
@@ -13,7 +13,7 @@ export TMP=/var/www/tmp
 export TMPDIR=/var/www/tmp
 export TEMP=/var/www/tmp
 exec /usr/bin/php-cgi \
- -d open_basedir="/var/www/html:/usr/share/php5:/usr/share/php:/tmp:/dev/random:/dev/urandom" \
+ -d open_basedir="/var/www/html:/usr/share/php5:/usr/share/php:/tmp:/dev/random:/dev/urandom:/var/www/cgi-bin" \
 -d upload_tmp_dir=/var/www/tmp \
 -d session.save_path=/var/www/tmp \
 -d sendmail_path="/usr/sbin/sendmail -t -i -f webmaster@tp3.de" \
