@@ -11,14 +11,14 @@ Usage (standalone)
 
 This image needs an external MySQL server or linked MySQL container. To create a MySQL container:
 
-    docker run -d -e MYSQL_ROOT_PASSWORD="**ChangeMe**" --name db -p 3306:3306 webtp3/tp3sql
+    docker run -d -e MYSQL_ROOT_PASSWORD="my-secret-pw" --name db -p 3306:3306 webtp3/tp3sql
 
 To run TYPO3 by linking to the database created above:
 
-    docker run -d --rm -it -v $PWD:/build --link db:db -e DB_PASS="**ChangeMe**" -p 80:80 --name typo3 webtp3/docker:16.4-stable
+    docker run -d --rm -it -v $PWD:/build --link db:db -e DB_PASS="my-secret-pw" -p 80:80 --name typo3 webtp3/docker:16.4-stable
     
 to have a bash simply add bash to the end of the command (as you can run any command in the docker image)
-"docker run -d --rm -it -v $PWD:/build --link db:db -e DB_PASS="**ChangeMe**" -p 80:80 --name typo3 webtp3/docker:8-stable bash"
+"docker run -d --rm -it -v $PWD:/build --link db:db -e DB_PASS="my-secret-pw" -p 80:80 --name typo3 webtp3/docker:8-stable bash"
 
 Following branches are available:
 8-stable (with tyo3 installed)

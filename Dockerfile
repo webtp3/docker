@@ -58,7 +58,7 @@ ENV DB_HOST **LinkMe**
 ENV DB_PORT **LinkMe**
 ENV DB_NAME typo3
 ENV DB_USER root
-ENV DB_PASS **ChangeMe**
+ENV DB_PASS my-secret-pw
 ENV INSTALL_TOOL_PASSWORD password
 RUN service apache2 restart
 RUN service ssh start
