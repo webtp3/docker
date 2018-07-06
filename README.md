@@ -15,7 +15,7 @@ This image needs an external MySQL server or linked MySQL container. To create a
 
 To run TYPO3 by linking to the database created above:
 
-    docker run -d --link db:db -e DB_PASS="**ChangeMe**" -p 80:80 webtp3/docker
+    docker run -d --rm -it -v $PWD:/build --link db:db -e DB_PASS="**ChangeMe**" -p 80:80 webtp3/docker:16.4-stable
 
 Usage (combined)
 ------------------
