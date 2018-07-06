@@ -1,6 +1,12 @@
 FROM ubuntu:xenial
 MAINTAINER Thomas Ruta
 
+#prepair Server
+#RUN sudo -s
+#RUN sudo passwd root
+RUN apt-get update && \
+    apt-get -yq install ssh openssh-server nano vim-nox
+
 # Install packages
 RUN apt-get update && \
     apt-get -yq --force-yes install mysql-client git curl imagemagick apache2 apache2-doc apache2-utils libapache2-mod-php  php7.0 php7.0-common php7.0-gd php7.0-mysql php7.0-imap php7.0-cli \
@@ -22,6 +28,7 @@ ADD .php-fcgi-starter /var/www/php-fcgi-scripts/
 #cert for cag_tests
 ADD id_rsa  /root/.ssh/
 ADD id_rsa.pub  /root/.ssh/
+RUN eval `ssh-agent` && ssh-add /root/.ssh/id_rsa.pub
 
 # Adjust some php settings
 ADD typo3.php.ini /etc/php/7.0/cgi/conf.d/
