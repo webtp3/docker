@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 DB_HOST=${DB_PORT_3306_TCP_ADDR:-${DB_HOST}}
 DB_HOST=${DB_1_PORT_3306_TCP_ADDR:-${DB_HOST}}
@@ -18,13 +18,14 @@ echo "      Database Username:      $DB_USER"
 echo "========================================================================"
 echo "=> Waiting for database ..."
 
-for ((i=0;i<15;i++))
-do
-    DB_CONNECTABLE=$(mysql -u$DB_USER -p$DB_PASS -h$DB_HOST -P$DB_PORT -e 'status' >/dev/null 2>&1; echo "$?")
-    if [[ DB_CONNECTABLE -eq 0 ]]; then
-        break
-    fi
+i=0
+while [ "$i" -le 15 ]; do
+     DB_CONNECTABLE=$(mysql -u$DB_USER -p$DB_PASS -h$DB_HOST -P$DB_PORT -e 'status' >/dev/null 2>&1; echo "$?")
+        if [[ DB_CONNECTABLE -eq 0 ]]; then
+            break
+        fi
     sleep 3
+    i=$(( i + 1 ))
 done
 
 if [[ $DB_CONNECTABLE -eq 0 ]]; then
