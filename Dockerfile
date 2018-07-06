@@ -48,7 +48,7 @@ RUN php composer-setup.php
 RUN php -r "unlink('composer-setup.php');"
 #RUN chmod 755 composer.phar
 RUN cd /var/www/
-RUN php composer.phar --dev --stability=dev create-project web-tp3/tp3_installer:dev-8.x-dev html
+#RUN php composer.phar --dev --stability=dev create-project web-tp3/tp3_installer:dev-8.x-dev html
 
 VOLUME [ "/var/www/html/uploads", "/var/www/html/fileadmin"]
 
