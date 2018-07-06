@@ -1,9 +1,9 @@
 {
-    "name": "web-tp3/tp3_installer",
-    "description": "testing typo3",
+    "name": "web-tp3/docker",
+    "description": "image for testing typo3",
     "type": "project",
     "minimum-stability": "dev",
-    "version": "1.0.0",
+    "version": "16.4-stable",
     "license": "GPL-3.0+",
     "authors": [
 
@@ -17,63 +17,5 @@
             "type": "composer",
             "url": "https://composer.typo3.org/"
         }
-    ],
-    "require": {
-        "typo3/cms": "dev-TYPO3_8-7",
-        "helhum/typo3-console": "^5",
-        "helhum/dotenv-connector": "^2",
-        "helhum/config-loader": "^0.8",
-        "ext-gd": "*",
-        "ext-fileinfo": "*",
-        "ext-zlib": "*",
-        "ext-openssl": "*",
-        "ext-zip": "*",
-        "ext-mysqli": "*",
-        "typo3/cms-cli": "*",
-        "typo3/class-alias-loader": "*",
-        "typo3/cms-composer-installers": "*",
-        "psr/http-message": "~1.0",
-        "cogpowered/finediff": "~0.3.1",
-        "guzzlehttp/guzzle": "^6.3.0",
-        "web-tp3/tp3_installer":"1.0.0"
-    },
-    "require-dev": {
-        "deployer/deployer": "^6",
-        "consolidation/robo": "^1",
-        "codeception/codeception":"*",
-        "typo3/testing-framework": "8.x-dev",
-        "friendsofphp/php-cs-fixer": "^2.13@dev",
-        "se/selenium-server-standalone":"~2.53",
-        "typo3/cms-styleguide" :"~8.0.8",
-        "ext-soap": "*",
-        "phpunit/php-invoker":"^1.1",
-        "enm1989/chromedriver": "~2.30",
-        "fiunchinho/phpunit-randomizer": "~3.0.0",
-        "phpunit/phpunit": "*",
-        "nimut/testing-framework": "^3.0@dev"
-
-    },
-    "autoload": {
-        "psr-4": {
-        }
-    },
-    "extra": {
-        "typo3/cms": {
-            "cms-package-dir": "{$vendor-dir}/typo3/cms",
-            "web-dir": "web"
-        },
-        "helhum/typo3-console": {
-            "install-extension-dummy": false
-        },
-        "helhum/dotenv-connector": {
-            "cache-dir": "var/cache"
-        },
-        "branch-alias": {
-            "dev-TYPO3_8-7": "8.x-dev"
-        }
-    },
-    "non-feature-branches": [
-        "TYPO3_.+"
     ]
-
 }
