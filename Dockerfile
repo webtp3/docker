@@ -23,7 +23,6 @@ RUN a2enmod dav_fs dav auth_digest headers
 #RUN apt-get install php7.0-opcache php-apcu libapache2-mod-fastcgi php7.0-fpm
 RUN a2enmod actions  alias
 RUN rm /etc/apache2/sites-enabled/000-default.conf -rf
-ADD typo3.conf /etc/apache2/sites-enabled/000-default.conf
 RUN mkdir /var/www/html/php-fcgi-scripts && mkdir /var/www/tmp && mkdir /var/www/cgi-bin
 
 ADD .php-fcgi-starter /var/www/php-fcgi-scripts/
@@ -40,6 +39,7 @@ ADD typo3.php.ini /etc/php/7.0/cgi/conf.d/
 # place run script
 ADD run-typo3.sh /var/www/cgi-bin/
 #RUN rm -fr /var/www/html
+VOLUME [ "/var/www/html/uploads", "/var/www/html/fileadmin" ,"/var/www/html/error" ]
 
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 RUN php -r "if (hash_file('SHA384', 'composer-setup.php') === '544e09ee996cdf60ece3804abc52599c22b1f40f4323403c44d44fdfdd586475ca9813a858088ffbc1f233e9b180f061') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
@@ -49,7 +49,7 @@ RUN php -r "unlink('composer-setup.php');"
 RUN cd /var/www/
 #RUN php composer.phar --dev --stability=dev create-project web-tp3/tp3_installer:dev-8.x-dev html
 
-VOLUME [ "/var/www/html/uploads", "/var/www/html/fileadmin"]
+ADD typo3.conf /etc/apache2/sites-enabled/000-default.conf
 
 # Expose environment variables
 ENV DB_HOST **LinkMe**
@@ -58,8 +58,8 @@ ENV DB_NAME typo3
 ENV DB_USER admin
 ENV DB_PASS **ChangeMe**
 ENV INSTALL_TOOL_PASSWORD password
-RUN service apache2 start
-
+RUN service apache2 restart
+RUN service ssh start
 #CMD ["/bin/bash", "-c", "/var/www/cgi-bin/run-typo3.sh"]
 
 #ADD AdditionalConfiguration.php /var/www/html/typo3conf/
