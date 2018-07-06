@@ -7,14 +7,14 @@ typo3:
   environment:
     DB_NAME: typo3
     DB_USER: root
-    DB_PASS: **ChangeMe**
+    DB_PASS: "**ChangeMe**"
     DB_HOST: "db"
     DB_PORT: "3306"
 db:
   image:  webtp3/tp3sql
   restart: always
   environment:
-    MYSQL_ROOT_PASSWORD: **ChangeMe**
+    MYSQL_ROOT_PASSWORD: "**ChangeMe**"
   ports:
     - 3306:3306
 adminer:
