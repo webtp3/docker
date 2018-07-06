@@ -17,7 +17,7 @@ RUN apt-get update && \
 #RUN ufw enable &&  ufw allow from 0.0.0.0 to 127.0.0.1 port http && \
 #    ufw allow from 0.0.0.0 to 127.0.0.1 port https && ufw allow from 0.0.0.0 to 127.0.0.1 port ssh
 
-RUN a2enmod suexec rewrite ssl actions include cgi
+RUN a2enmod rewrite ssl actions include cgi
 RUN a2enmod dav_fs dav auth_digest headers
 
 #RUN apt-get install php7.0-opcache php-apcu libapache2-mod-fastcgi php7.0-fpm
