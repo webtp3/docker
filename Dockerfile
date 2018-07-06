@@ -21,7 +21,7 @@ RUN a2enmod rewrite ssl actions include cgi
 RUN a2enmod dav_fs dav auth_digest headers
 
 #RUN apt-get install php7.0-opcache php-apcu libapache2-mod-fastcgi php7.0-fpm
-RUN a2enmod actions  alias
+RUN a2enmod actions fastcgi alias
 RUN rm /etc/apache2/sites-enabled/000-default.conf -rf
 RUN mkdir /var/www/html/php-fcgi-scripts && mkdir /var/www/tmp && mkdir /var/www/cgi-bin
 
@@ -40,17 +40,16 @@ RUN eval `ssh-agent`
 ADD typo3.php.ini /etc/php/7.0/cgi/conf.d/
 # place run script
 ADD run-typo3.sh /var/www/cgi-bin/
-#RUN rm -fr /var/www/html
-VOLUME [ "/var/www/html/uploads", "/var/www/html/fileadmin" ,"/var/www/html/error" ]
-
+RUN chmod 755 /var/www/cgi-bin/
+RUN rm -fr /var/www/html
+RUN cd /var/www/
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 RUN php -r "if (hash_file('SHA384', 'composer-setup.php') === '544e09ee996cdf60ece3804abc52599c22b1f40f4323403c44d44fdfdd586475ca9813a858088ffbc1f233e9b180f061') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
 RUN php composer-setup.php
 RUN php -r "unlink('composer-setup.php');"
-#RUN chmod 755 composer.phar
-RUN cd /var/www/
-#RUN php composer.phar --dev --stability=dev create-project web-tp3/tp3_installer:dev-8.x-dev html
 
+RUN php composer.phar --dev --stability=dev create-project web-tp3/tp3_installer:dev-8.x-dev html
+VOLUME [ "/var/www/html/uploads", "/var/www/html/fileadmin" ,"/var/www/html/error" ]
 ADD typo3.conf /etc/apache2/sites-enabled/000-default.conf
 
 # Expose environment variables
