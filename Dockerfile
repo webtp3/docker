@@ -14,8 +14,8 @@ RUN apt-get update && \
     php7.0-sqlite3 php7.0-tidy php7.0-xmlrpc php7.0-xsl memcached php-memcache php-imagick php-gettext php7.0-zip php7.0-mbstring  php7.0-soap  php7.0-json php7.0-opcache php-apcu libapache2-mod-fastcgi \
     php7.0-fpm
 
-RUN ufw enable && ufw allow ssh && ufw allow dns && ufw allow http && ufw allow https && ufw allow from 0.0.0.0 to 127.0.0.1 port http && \
-    ufw allow from 0.0.0.0 to 127.0.0.1 port https && ufw allow from 0.0.0.0 to 127.0.0.1 port ssh
+#RUN ufw enable &&  ufw allow from 0.0.0.0 to 127.0.0.1 port http && \
+#    ufw allow from 0.0.0.0 to 127.0.0.1 port https && ufw allow from 0.0.0.0 to 127.0.0.1 port ssh
 
 RUN a2enmod suexec rewrite ssl actions include cgi
 RUN a2enmod dav_fs dav auth_digest headers
