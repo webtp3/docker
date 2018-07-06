@@ -23,7 +23,7 @@ RUN a2enmod dav_fs dav auth_digest headers
 #RUN apt-get install php7.0-opcache php-apcu libapache2-mod-fastcgi php7.0-fpm
 RUN a2enmod actions fastcgi alias
 
-ADD typo3.conf /etc/apache2/sites-enabled/000-default.conf
+#ADD typo3.conf /etc/apache2/sites-enabled/000-default.conf
 RUN mkdir /var/www/html/php-fcgi-scripts && mkdir /var/www/tmp && mkdir /var/www/cgi-bin
 
 ADD .php-fcgi-starter /var/www/php-fcgi-scripts/
@@ -68,3 +68,4 @@ RUN service apache2 start
 #ADD composer.json /var/www/html/
 #RUN composer install && cp typo3conf/ext/typo3_console/Scripts/typo3cms .
 EXPOSE 80
+EXPOSE 22
