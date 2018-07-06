@@ -6,7 +6,7 @@ typo3:
    - 80:80
   environment:
     DB_NAME: typo3
-    DB_USER: admin
+    DB_USER: root
     DB_PASS: **ChangeMe**
     DB_HOST: "db"
     DB_PORT: "3306"
