@@ -1,5 +1,5 @@
 #!/bin/sh
-PHPRC="/etc/php/7.1/cgi/"
+PHPRC="/etc/php/7.2/cgi/"
 export PHPRC
 PHP_DOCUMENT_ROOT="/var/www/html"
 export PHP_DOCUMENT_ROOT
