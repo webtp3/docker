@@ -39,8 +39,6 @@ RUN eval `ssh-agent`
 ADD typo3.php.ini /etc/php/7.0/cgi/conf.d/
 # place run script
 ADD run-typo3.sh /var/www/cgi-bin/
-RUN echo localhost.tp3.de > /etc/hostname
-RUN hostname && hostname -f
 #RUN rm -fr /var/www/html
 
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
