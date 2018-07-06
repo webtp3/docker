@@ -49,9 +49,9 @@ Mysql Server can also be reached from outside on port 3306
 
 SSH Server also for Rsync and other stuff
 
-graphicsmagick, imagemagick, letscrypr, openssl, php-xdebug and I think all what you need.
+graphicsmagick, imagemagick, letscrypt, openssl, php-xdebug and I think all what you need.
 
-Usage (combined)
+Documentation 
 ------------------
 
  more about the base images an be found on the docker hub:
