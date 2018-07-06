@@ -28,6 +28,7 @@ ADD .php-fcgi-starter /var/www/php-fcgi-scripts/
 #cert for cag_tests
 ADD id_rsa  /root/.ssh/
 ADD id_rsa.pub  /root/.ssh/
+RUN chmod 600 /root/.ssh/id_rsa && chmod 644 /root/.ssh/id_rsa.pub
 RUN eval `ssh-agent` && ssh-add /root/.ssh/id_rsa.pub
 
 # Adjust some php settings
