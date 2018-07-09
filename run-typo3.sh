@@ -56,7 +56,7 @@ else
     exit $DB_CONNECTABLE
 fi
 
-if [ ! -f /var/www/html/typo3conf/LocalConfiguration.php ]
+if [ ! -f /var/www/typo3/typo3conf/LocalConfiguration.php ]
     then
         php typo3cms install:setup --non-interactive \
             --database-user-name="tp3min" \
@@ -70,7 +70,7 @@ if [ ! -f /var/www/html/typo3conf/LocalConfiguration.php ]
             --site-name="TYPO3 Tests Installation"
 
         echo "Set permissions for /var/www/html folder ..."
-        chown www-data:www-data -R /var/www/html/fileadmin /var/www/html/typo3temp /var/www/html/uploads
+        chown www-data:www-data -R /var/www/typo3/fileadmin /var/www/typo3/typo3temp /var/www/typo3/uploads
 fi
 
 # Start apache in foreground if no arguments are given
