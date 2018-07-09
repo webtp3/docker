@@ -128,7 +128,7 @@ SetEnv TYPO3_CONTEXT Development
     # Rules to set ApplicationContext based on hostname
     RewriteCond %{HTTP_HOST} ^localdev\.tp3\.de$
     RewriteRule .? - [E=TYPO3_CONTEXT:Development]
-    RewriteCond %{HTTP_HOST} ^localhost\.tp3\.de$
+    dRewriteCond %{HTTP_HOST} ^localhost\.tp3\.de$
     RewriteRule .? - [E=TYPO3_CONTEXT:Development]
     RewriteCond %{HTTP_HOST} ^staging\.tp3\.de$
     RewriteRule .? - [E=TYPO3_CONTEXT:Production/Staging]

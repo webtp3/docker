@@ -17,8 +17,11 @@ db:
     MYSQL_ROOT_PASSWORD: my-secret-pw
   ports:
     - 3306:3306
+
 adminer:
   image: adminer
   restart: always
+  links:
+    - db
   ports:
     - 8080:8080
