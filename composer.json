@@ -17,5 +17,10 @@
             "type": "composer",
             "url": "https://composer.typo3.org/"
         }
-    ]
+    ],
+    "extra": {
+        "helhum/dotenv-connector": {
+            "env-file": ".env"
+        }
+    }
 }

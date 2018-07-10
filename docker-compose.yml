@@ -4,21 +4,25 @@ typo3:
    - db
   ports:
    - 80:80
+   - 9000:9000
   environment:
     DB_NAME: typo3
-    DB_USER: admin
-    DB_PASS: **ChangeMe**
+    DB_USER: root
+    DB_PASS: my-secret-pw
     DB_HOST: "db"
     DB_PORT: "3306"
 db:
   image:  webtp3/tp3sql
   restart: always
   environment:
-    MYSQL_ROOT_PASSWORD: **ChangeMe**
+    MYSQL_ROOT_PASSWORD: my-secret-pw
   ports:
     - 3306:3306
+
 adminer:
   image: adminer
   restart: always
+  links:
+    - db
   ports:
     - 8080:8080

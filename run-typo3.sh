@@ -5,9 +5,9 @@ DB_HOST=${DB_1_PORT_3306_TCP_ADDR:-${DB_HOST}}
 DB_PORT=${DB_PORT_3306_TCP_PORT:-${DB_PORT}}
 DB_PORT=${DB_1_PORT_3306_TCP_PORT:-${DB_PORT}}
 
-if [ "$DB_PASS" = "**ChangeMe**" ] && [ -n "$DB_1_ENV_MYSQL_PASS" ]; then
-    DB_PASS="$DB_1_ENV_MYSQL_PASS"
-fi
+#if [ "$DB_PASS" = "my-secret-pw" ] && [ -n "$DB_1_ENV_MYSQL_PASS" ]; then
+#    DB_PASS="$DB_1_ENV_MYSQL_PASS"
+#fi
 
 echo "=> Using the following MySQL/MariaDB configuration:"
 echo "========================================================================"
@@ -18,13 +18,14 @@ echo "      Database Username:      $DB_USER"
 echo "========================================================================"
 echo "=> Waiting for database ..."
 
-for ((i=0;i<15;i++))
-do
-    DB_CONNECTABLE=$(mysql -u$DB_USER -p$DB_PASS -h$DB_HOST -P$DB_PORT -e 'status' >/dev/null 2>&1; echo "$?")
-    if [[ DB_CONNECTABLE -eq 0 ]]; then
-        break
-    fi
+i=0
+while [ "$i" -le 15 ]; do
+     DB_CONNECTABLE=$(mysql -u$DB_USER -p$DB_PASS -h$DB_HOST -P$DB_PORT -e 'status' >/dev/null 2>&1; echo "$?")
+        if [[ DB_CONNECTABLE -eq 0 ]]; then
+            break
+        fi
     sleep 3
+    i=$(( i + 1 ))
 done
 
 if [[ $DB_CONNECTABLE -eq 0 ]]; then
@@ -55,7 +56,7 @@ else
     exit $DB_CONNECTABLE
 fi
 
-if [ ! -f /var/www/html/typo3conf/LocalConfiguration.php ]
+if [ ! -f /var/www/html/web/typo3conf/LocalConfiguration.php ]
     then
         php typo3cms install:setup --non-interactive \
             --database-user-name="tp3min" \
@@ -66,14 +67,15 @@ if [ ! -f /var/www/html/typo3conf/LocalConfiguration.php ]
             --database-create=0 \
             --admin-user-name="tp3min" \
             --admin-password="Init1111" \
-            --site-name="TYPO3 Demo Installation"
+            --site-name="TYPO3 Tests Installation"
 
         echo "Set permissions for /var/www/html folder ..."
-        chown www-data:www-data -R /var/www/html/fileadmin /var/www/html/typo3temp /var/www/html/uploads
+        chown www-data:www-data -R /var/www/html/web/fileadmin /var/www/html/web/typo3temp /var/www/html/web/uploads
 fi
 
 # Start apache in foreground if no arguments are given
 if [ $# -eq 0 ]
 then
-    /run.sh
+    service apache2 start
+    service ssh start
 fi
