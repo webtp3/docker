@@ -46,11 +46,13 @@ RUN cp /composer.phar /var/www/composer.phar
 #RUN php /var/www/composer.phar --dev --stability=dev create-project web-tp3/tp3_installer:dev-8.x-dev typo3
 #RUN rm -R /var/www/html -rf && mv /typo3 /var/www/html
 
-
 VOLUME [ "/var/www/html/web/uploads", "/var/www/html/web/fileadmin", "/var/www/html/web/typo3temp" ,"/var/www/html/web/error" ]
 RUN chown typo3user:www-data -R /var/www/html/
 
+#apache and letscrypt for ssl
 ADD typo3.conf /etc/apache2/sites-enabled/000-default.conf
+RUN certbot --apache -d localhost.tp3.de
+RUN apt-get -yq install letsencrypt python-certbot-apache
 
 # Expose environment variables
 ENV DB_HOST **LinkMe**
