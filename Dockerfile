@@ -51,8 +51,10 @@ RUN chown typo3user:www-data -R /var/www/html/
 
 #apache and letscrypt for ssl
 ADD typo3.conf /etc/apache2/sites-enabled/000-default.conf
-RUN certbot --apache -d localhost.tp3.de
+RUN add-apt-repository ppa:certbot/certbot
 RUN apt-get -yq install letsencrypt python-certbot-apache
+RUN certbot --apache -d localhost.tp3.de
+
 
 # Expose environment variables
 ENV DB_HOST **LinkMe**
