@@ -54,6 +54,8 @@ RUN rm -R /var/www/html -rf && mv /typo3 /var/www/html
 
 #ADD .htaccess  /var/www/html/web/
 VOLUME [ "/var/www/html/web/uploads", "/var/www/html/web/fileadmin" ,"/var/www/html/web/error" ]
+RUN chown www-data:www-data -R /var/www/html/ && chmod 755 -R /var/www/html/web/
+
 ADD typo3.conf /etc/apache2/sites-enabled/000-default.conf
 
 # Expose environment variables

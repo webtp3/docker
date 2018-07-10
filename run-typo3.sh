@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 DB_HOST=${DB_PORT_3306_TCP_ADDR:-${DB_HOST}}
 DB_HOST=${DB_1_PORT_3306_TCP_ADDR:-${DB_HOST}}
@@ -70,7 +70,7 @@ if [ ! -f /var/www/html/typo3conf/LocalConfiguration.php ]
             --site-name="TYPO3 Tests Installation"
 
         echo "Set permissions for /var/www/html folder ..."
-        chown www-data:www-data -R /var/www/html/fileadmin /var/www/html/typo3temp /var/www/html/uploads
+        chown www-data:www-data -R /var/www/html/web/fileadmin /var/www/html/web/typo3temp /var/www/html/web/uploads
 fi
 
 # Start apache in foreground if no arguments are given
