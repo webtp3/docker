@@ -68,7 +68,7 @@ ENV INSTALL_TOOL_PASSWORD password
 RUN service apache2 start
 RUN service ssh start
 #RUN sh /var/www/cgi-bin/run-typo3.sh
-#CMD ["/bin/bash", "-c", "/var/www/cgi-bin/run-typo3.sh"]
+CMD ["/bin/bash", "-c", "/var/www/cgi-bin/run-typo3.sh"]
 
 ADD AdditionalConfiguration.php /var/www/html/web/typo3conf/
 # Install dependencies defined in composer.json
