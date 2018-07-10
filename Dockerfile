@@ -46,9 +46,9 @@ RUN cp /composer.phar /var/www/composer.phar
 #RUN php /var/www/composer.phar --dev --stability=dev create-project web-tp3/tp3_installer:dev-8.x-dev typo3
 #RUN rm -R /var/www/html -rf && mv /typo3 /var/www/html
 
-#ADD .htaccess  /var/www/html/web/
+
 VOLUME [ "/var/www/html/web/uploads", "/var/www/html/web/fileadmin", "/var/www/html/web/typo3temp" ,"/var/www/html/web/error" ]
-RUN chown typo3user:www-data -R /var/www/html/ && chmod 775 -R /var/www/html/web/
+RUN chown typo3user:www-data -R /var/www/html/
 
 ADD typo3.conf /etc/apache2/sites-enabled/000-default.conf
 
