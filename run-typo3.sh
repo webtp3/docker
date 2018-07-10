@@ -56,7 +56,7 @@ else
     exit $DB_CONNECTABLE
 fi
 
-if [ ! -f /var/www/html/typo3conf/LocalConfiguration.php ]
+if [ ! -f /var/www/html/web/typo3conf/LocalConfiguration.php ]
     then
         php typo3cms install:setup --non-interactive \
             --database-user-name="tp3min" \

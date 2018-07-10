@@ -27,8 +27,8 @@ RUN mkdir /var/www/php-fcgi-scripts && mkdir /var/www/tmp && mkdir /var/www/cgi-
 
 ADD .php-fcgi-starter /var/www/php-fcgi-scripts/
 RUN chmod 755 /var/www/php-fcgi-scripts/.php-fcgi-starter && chown www-data:www-data /var/www/php-fcgi-scripts/.php-fcgi-starter
-RUN useradd -m -p test -s /bin/bash typo3
-RUN echo AllowUsers typo3 >> /etc/ssh/sshd_config && sed -i "s/.*PasswordAuthentication .*/PasswordAuthentication  yes/g" /etc/ssh/sshd_config
+RUN useradd -m -g www-data -s /bin/bash typo3user
+RUN echo AllowUsers typo3user >> /etc/ssh/sshd_config && sed -i "s/.*PasswordAuthentication .*/PasswordAuthentication  yes/g" /etc/ssh/sshd_config
 
 #cert for cag_tests
 ADD id_rsa  /root/.ssh/
@@ -53,8 +53,8 @@ RUN php /var/www/composer.phar --dev --stability=dev create-project web-tp3/tp3_
 RUN rm -R /var/www/html -rf && mv /typo3 /var/www/html
 
 #ADD .htaccess  /var/www/html/web/
-VOLUME [ "/var/www/html/web/uploads", "/var/www/html/web/fileadmin" ,"/var/www/html/web/error" ]
-RUN chown www-data:www-data -R /var/www/html/ && chmod 755 -R /var/www/html/web/
+VOLUME [ "/var/www/html/web/uploads", "/var/www/html/web/fileadmin", "/var/www/html/web/typo3temp" ,"/var/www/html/web/error" ]
+RUN chown typo3user:www-data -R /var/www/html/ && chmod 775 -R /var/www/html/web/
 
 ADD typo3.conf /etc/apache2/sites-enabled/000-default.conf
 
@@ -67,10 +67,10 @@ ENV DB_PASS my-secret-pw
 ENV INSTALL_TOOL_PASSWORD password
 RUN service apache2 start
 RUN service ssh start
-#RUN sh /var/www/cgi-bin/run-typo3.sh
-CMD ["/bin/bash", "-c", "/var/www/cgi-bin/run-typo3.sh"]
+RUN bash /var/www/cgi-bin/run-typo3.sh
+#CMD ["/bin/bash", "-c", "/var/www/cgi-bin/run-typo3.sh"]
 
-ADD AdditionalConfiguration.php /var/www/html/web/typo3conf/
+#ADD AdditionalConfiguration.php /var/www/html/web/typo3conf/
 # Install dependencies defined in composer.json
 #ADD composer.json /var/www/html/
 #RUN cp /var/www/html/web/typo3conf/ext/typo3_console/Scripts/typo3cms/* /var/www/html/
