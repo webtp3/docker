@@ -48,7 +48,7 @@ The mysql Adminer
 Mysql Server can also be reached from outside on port 3306
 
 SSH Server also for Rsync and other stuff
-
+to use ssh server there is a user typo3user that needs a password (docker exec...)
 graphicsmagick, imagemagick, letscrypt, openssl, php-xdebug and I think all what you need.
 
 Documentation 

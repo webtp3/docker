@@ -21,7 +21,7 @@ RUN mkdir /var/www/php-fcgi-scripts && mkdir /var/www/tmp && mkdir /var/www/cgi-
 
 RUN useradd -m -g www-data -s /bin/bash typo3user
 ADD .php-fcgi-starter /var/www/php-fcgi-scripts/
-RUN chmod 755 /var/www/php-fcgi-scripts/.php-fcgi-starter && chown typo3user:www-data /var/www/php-fcgi-scripts/.php-fcgi-starter
+RUN chmod 775 /var/www/php-fcgi-scripts/.php-fcgi-starter && chown typo3user:www-data /var/www/php-fcgi-scripts/.php-fcgi-starter
 RUN echo AllowUsers typo3user >> /etc/ssh/sshd_config && sed -i "s/.*PasswordAuthentication .*/PasswordAuthentication  yes/g" /etc/ssh/sshd_config
 
 #cert for cag_tests
@@ -61,8 +61,9 @@ ENV DB_NAME typo3
 ENV DB_USER root
 ENV DB_PASS my-secret-pw
 ENV INSTALL_TOOL_PASSWORD password
-RUN service apache2 start
-RUN service ssh start
+RUN service apache2 restart
+RUN service ssh restart
+CMD ["/bin/bash"]
 #install typo3
 #RUN bash /var/www/cgi-bin/run-typo3.sh
 #CMD ["/bin/bash", "-c", "/var/www/cgi-bin/run-typo3.sh"]
